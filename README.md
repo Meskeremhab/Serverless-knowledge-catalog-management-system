@@ -1,58 +1,32 @@
+Serverless knowledge catalog management system
+A knowledge catalog item represents a resource that is used for teaching in a particular course. It can be a paper, a slide deck, a web site, etc...
 
-# Welcome to your CDK Python project!
 
-This is a blank project for CDK development with Python.
+Requirements
+Knowledge catalog items are identified by their name and the course to which they belong. The same catalog item can belong to different courses. Additionally, for each catalog item we must store the academic year for which it was created. Additional fields must be permitted.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the `.venv`
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
+IE needs to be able to perform the following operations through the API:
 
-To manually create a virtualenv on MacOS and Linux:
+Add a knowledge catalog item
+Retrieve a knowledge catalog item by its id
+Delete a knowledge catalog item by its id
+Retrieve all knowledge catalog items in the database
+Retrieve all the knowledge catalog items of a particular course
+Retrieve all the knowledge catalog items of a particular year
 
-```
-$ python -m venv .venv
-```
 
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
+Implementation requirements:
+The application must be implemented using AWS Lambda, Amazon ApiGateway and AWS DynamoDB.
+You can only use the scan operation to implement the endpoint that retrieves all the items in the database.
+If you implement the solution using IaC, it must be through CDK and you can only use L1 and L2 constructs.
 
-```
-$ source .venv/bin/activate
-```
 
-If you are a Windows platform, you would activate the virtualenv like this:
+Considerations
+Think about the different client errors that can occur, and return the appropriate HTTP status code when needed.
+The CDK project and any other code resource that you implement can be written in the programming language of your choice.
+To test the API, you can use Postman.
 
-```
-% .venv\Scripts\activate.bat
-```
 
-Once the virtualenv is activated, you can install the required dependencies.
 
-```
-$ pip install -r requirements.txt
-```
 
-At this point you can now synthesize the CloudFormation template for this code.
-
-```
-$ cdk synth
-```
-
-To add additional dependencies, for example other CDK libraries, just add
-them to your `setup.py` file and rerun the `pip install -r requirements.txt`
-command.
-
-## Useful commands
-
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
-
-Enjoy!
